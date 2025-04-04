@@ -125,7 +125,7 @@ document.addEventListener("DOMContentLoaded", function () {
         const formData = { name, email, subject, message };
 
         try {
-            const response = await fetch("http://localhost:5000/api/contact", {
+            const response = await fetch("protfoliowebbackend.vercel.app", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
@@ -190,3 +190,34 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     });
 });
+
+document.getElementById("sendMessage").addEventListener("click", function(e) {
+    e.preventDefault();
+    
+    const name = document.getElementById("name").value;
+    const email = document.getElementById("email").value;
+    const subject = document.getElementById("subject").value;
+    const message = document.getElementById("message").value;
+
+    if (!name || !email || !subject || !message) {
+        toastr.error("Please fill all fields");
+        return;
+    }
+
+    emailjs.send("YOUR_SERVICE_ID", "YOUR_TEMPLATE_ID", {
+        from_name: name,
+        from_email: email,
+        subject: subject,
+        message: message,
+    }).then(function(response) {
+        toastr.success("Message sent successfully!");
+        document.getElementById("name").value = "";
+        document.getElementById("email").value = "";
+        document.getElementById("subject").value = "";
+        document.getElementById("message").value = "";
+    }, function(error) {
+        toastr.error("Failed to send message. Try again later.");
+        console.log("FAILED...", error);
+    });
+});
+
