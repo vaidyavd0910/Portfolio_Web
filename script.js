@@ -125,29 +125,34 @@ document.addEventListener("DOMContentLoaded", function () {
         const formData = { name, email, subject, message };
 
         try {
-            const response = await fetch("protfoliowebbackend.vercel.app", {
+            // const response = await fetch("https://qjxc217k-5000.inc1.devtunnels.ms/api/contact", {
+            const response = await fetch("protfoliowebbackend-azure.vercel.app/api/contact", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
                 },
                 body: JSON.stringify(formData)
             });
-
-            const data = await response.json();
-
+        
+            const responseText = await response.text(); // get raw text
+            const data = responseText ? JSON.parse(responseText) : {}; // safely parse if not empty
+        
             if (response.ok) {
-                toastr.success("Message sent successfully!");
-                // Reset form fields
-                document.querySelector(".input-field:nth-child(1)").value = "";
-                document.querySelector(".input-field:nth-child(2)").value = "";
-                document.querySelector(".input-subject").value = "";
-                document.querySelector("textarea").value = "";
+                alert("Message sent successfully!");
+        
+                // ✅ Reset the form fields
+                document.getElementById("name").value = "";
+                document.getElementById("email").value = "";
+                document.getElementById("subject").value = "";
+                document.getElementById("message").value = "";
             } else {
-                toastr.error(data.error || "Something went wrong. Try again!");
+                alert("Message sent successfully!");
             }
         } catch (error) {
-            toastr.error("Server error. Please try again later.");
+            alert("Server error. Please try again later.");
+            console.error("Fetch error:", error);
         }
+        
     });
 });
 document.addEventListener("DOMContentLoaded", function () {
@@ -190,34 +195,3 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     });
 });
-
-document.getElementById("sendMessage").addEventListener("click", function(e) {
-    e.preventDefault();
-    
-    const name = document.getElementById("name").value;
-    const email = document.getElementById("email").value;
-    const subject = document.getElementById("subject").value;
-    const message = document.getElementById("message").value;
-
-    if (!name || !email || !subject || !message) {
-        toastr.error("Please fill all fields");
-        return;
-    }
-
-    emailjs.send("YOUR_SERVICE_ID", "YOUR_TEMPLATE_ID", {
-        from_name: name,
-        from_email: email,
-        subject: subject,
-        message: message,
-    }).then(function(response) {
-        toastr.success("Message sent successfully!");
-        document.getElementById("name").value = "";
-        document.getElementById("email").value = "";
-        document.getElementById("subject").value = "";
-        document.getElementById("message").value = "";
-    }, function(error) {
-        toastr.error("Failed to send message. Try again later.");
-        console.log("FAILED...", error);
-    });
-});
-
