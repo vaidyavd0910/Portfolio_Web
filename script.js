@@ -126,7 +126,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
         try {
             // const response = await fetch("https://qjxc217k-5000.inc1.devtunnels.ms/api/contact", {
-            const response = await fetch("protfoliowebbackend-azure.vercel.app/api/contact", {
+            const response = await fetch("https://protfolio-web-backend.vercel.app/api/contact", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
