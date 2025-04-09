@@ -118,7 +118,7 @@ document.addEventListener("DOMContentLoaded", function () {
         const message = document.querySelector("textarea").value;
 
         if (!name || !email || !subject || !message) {
-            toastr.error("All fields are required");
+            alert("All fields are required");
             return;
         }
 
@@ -146,7 +146,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 document.getElementById("subject").value = "";
                 document.getElementById("message").value = "";
             } else {
-                alert("Message sent successfully!");
+                alert("Somthing went wrong..!");
             }
         } catch (error) {
             alert("Server error. Please try again later.");
