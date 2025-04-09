@@ -91,7 +91,7 @@ window.addEventListener("scroll", scrollActive);
 
 document.getElementById('download-btn').addEventListener('click', function() {
     // Specify the file URL (ensure the path is correct)
-    const fileURL = './Vaishnavi_Vaidya_SDE.pdf'; // Replace with the actual file URL
+    const fileURL = './Vaishnavi_Vaidya_CV.pdf'; // Replace with the actual file URL
 
     // Create an invisible link element
     const link = document.createElement('a');
