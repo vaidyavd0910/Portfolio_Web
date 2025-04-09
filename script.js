@@ -118,7 +118,8 @@ document.addEventListener("DOMContentLoaded", function () {
         const message = document.querySelector("textarea").value;
 
         if (!name || !email || !subject || !message) {
-            toastr.error("All fields are required");
+            alert("Message sent successfully!");
+        
             return;
         }
 
